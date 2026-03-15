@@ -1,0 +1,201 @@
+@{
+    ViewData["Title"] = "Discover Movies - RentAMovie";
+}
+
+<!-- Split Screen Hero -->
+<section class="split-hero">
+    <div class="split-hero-left">
+        <div class="hero-left-content">
+            <span class="hero-tag">NEW RELEASES WEEKLY</span>
+            <h1 class="hero-main-title">
+                Discover your<br />
+                next favorite<br />
+                <span class="rotating-word">blockbuster</span>
+            </h1>
+            <p class="hero-description">
+                Curated collections. Personalized picks. Unlimited entertainment.
+            </p>
+            <div class="hero-action-group">
+                @if (User.Identity != null && User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Movies" asp-action="Index" class="btn-explore">
+                        Explore Now
+                        <span class="arrow">→</span>
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Register" class="btn-explore">
+                        Get Started
+                        <span class="arrow">→</span>
+                    </a>
+                }
+                <div class="hero-stats-inline">
+                    <div class="stat-inline">
+                        <strong>15K+</strong>
+                        <span>movies</span>
+                    </div>
+                    <div class="stat-inline">
+                        <strong>4.9★</strong>
+                        <span>rating</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="split-hero-right">
+        <div class="featured-posters">
+            <div class="poster-stack">
+                <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="Featured" class="poster-main" />
+                <img src="https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" alt="Featured" class="poster-accent-1" />
+                <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="Featured" class="poster-accent-2" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Trending Now Carousel -->
+<section class="trending-section">
+    <div class="container">
+        <div class="section-top">
+            <h2 class="trending-title">🔥 Trending This Week</h2>
+            <a asp-controller="Movies" asp-action="Index" class="view-all-link">View All →</a>
+        </div>
+        <div class="trending-carousel">
+            <div class="trending-item">
+                <div class="trending-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="Trending" />
+                    <div class="trending-overlay">
+                        <span class="trending-rank">#1</span>
+                    </div>
+                </div>
+                <h4>The Dark Knight</h4>
+                <p class="trending-meta">2008 • Action</p>
+            </div>
+            <div class="trending-item">
+                <div class="trending-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" alt="Trending" />
+                    <div class="trending-overlay">
+                        <span class="trending-rank">#2</span>
+                    </div>
+                </div>
+                <h4>Inception</h4>
+                <p class="trending-meta">2010 • Sci-Fi</p>
+            </div>
+            <div class="trending-item">
+                <div class="trending-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="Trending" />
+                    <div class="trending-overlay">
+                        <span class="trending-rank">#3</span>
+                    </div>
+                </div>
+                <h4>Shawshank Redemption</h4>
+                <p class="trending-meta">1994 • Drama</p>
+            </div>
+            <div class="trending-item">
+                <div class="trending-poster">
+                    <img src="https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" alt="Trending" />
+                    <div class="trending-overlay">
+                        <span class="trending-rank">#4</span>
+                    </div>
+                </div>
+                <h4>The Godfather</h4>
+                <p class="trending-meta">1972 • Crime</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Genre Pills -->
+<section class="genre-pills-section">
+    <div class="container">
+        <h2 class="pills-title">Browse by Genre</h2>
+        <div class="genre-pills">
+            <a asp-controller="Movies" asp-action="Index" asp-route-genres="Action" class="genre-pill">
+                <span class="pill-emoji">💥</span>
+                Action
+            </a>
+            <a asp-controller="Movies" asp-action="Index" asp-route-genres="Sci-Fi" class="genre-pill">
+                <span class="pill-emoji">🚀</span>
+                Sci-Fi
+            </a>
+            <a asp-controller="Movies" asp-action="Index" asp-route-genres="Drama" class="genre-pill">
+                <span class="pill-emoji">🎭</span>
+                Drama
+            </a>
+            <a asp-controller="Movies" asp-action="Index" asp-route-genres="Crime" class="genre-pill">
+                <span class="pill-emoji">🕵️</span>
+                Crime
+            </a>
+            <a asp-controller="Movies" asp-action="Index" asp-route-genres="Adventure" class="genre-pill">
+                <span class="pill-emoji">🗺️</span>
+                Adventure
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us - Simple Icons -->
+<section class="why-choose">
+    <div class="container">
+        <div class="why-grid">
+            <div class="why-item">
+                <div class="why-circle">🎬</div>
+                <h3>Massive Library</h3>
+                <p>15,000+ movies and growing</p>
+            </div>
+            <div class="why-item">
+                <div class="why-circle">⚡</div>
+                <h3>Instant Access</h3>
+                <p>Watch in seconds, no waiting</p>
+            </div>
+            <div class="why-item">
+                <div class="why-circle">💰</div>
+                <h3>Fair Pricing</h3>
+                <p>From $2.99/day, no subscription</p>
+            </div>
+            <div class="why-item">
+                <div class="why-circle">📱</div>
+                <h3>Any Device</h3>
+                <p>TV, laptop, tablet, phone</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social Proof -->
+<section class="social-proof">
+    <div class="container">
+        <div class="proof-content">
+            <div class="proof-text">
+                <h2>Join 120,000+ movie lovers</h2>
+                <p>Trusted by film enthusiasts worldwide</p>
+            </div>
+            <div class="proof-numbers">
+                <div class="proof-stat">
+                    <div class="proof-value">4.8★</div>
+                    <div class="proof-label">Average Rating</div>
+                </div>
+                <div class="proof-stat">
+                    <div class="proof-value">2M+</div>
+                    <div class="proof-label">Rentals This Month</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA - Minimal -->
+<section class="final-cta-minimal">
+    <div class="cta-minimal-content">
+        <h2>Ready to watch?</h2>
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Movies" asp-action="Index" class="btn-cta-minimal">Browse Movies →</a>
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Register" class="btn-cta-minimal">Start Free →</a>
+        }
+    </div>
+</section>

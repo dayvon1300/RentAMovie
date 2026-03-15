@@ -1,0 +1,51 @@
+@model IEnumerable<RentAMovie.Models.Movie>
+@{
+    ViewData["Title"] = "Manage Movies";
+}
+
+<div class="page-header">
+    <h2>Manage Movies</h2>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<a asp-action="CreateMovie" class="btn btn-primary mb-3">Add New Movie</a>
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Genre</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Price/Day</th>
+                <th>Copies</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model)
+            {
+                <tr>
+                    <td>@movie.Genre</td>
+                    <td>@movie.Title</td>
+                    <td>@movie.Year</td>
+                    <td>$@movie.PricePerDay.ToString("F2")</td>
+                    <td>@movie.AvailableCopies</td>
+                    <td>
+                        <a asp-action="EditMovie" asp-route-id="@movie.Id" class="btn btn-sm btn-primary">Edit</a>
+                        <form method="post" asp-action="DeleteMovie" asp-route-id="@movie.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-secondary" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

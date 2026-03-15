@@ -1,0 +1,125 @@
+﻿@model IEnumerable<RentAMovie.Models.Movie>
+@{
+    ViewData["Title"] = "Available Movies";
+    var genres = ViewBag.Genres as List<string>;
+    var selectedGenres = ViewBag.SelectedGenres as List<string> ?? new List<string>();
+}
+
+<div class="page-header">
+    <h2>Available Movies</h2>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="movies-with-sidebar">
+    <!-- Sidebar Filter -->
+    <aside class="filter-sidebar">
+        <div class="filter-box">
+            <div class="filter-title">
+                Genre
+                @if (selectedGenres.Any())
+                {
+                    <a href="/Movies" class="clear-link">Clear</a>
+                }
+            </div>
+            <form method="get">
+                @foreach (var genre in genres ?? new List<string>())
+                {
+                    var isChecked = selectedGenres.Contains(genre);
+                    <label class="filter-checkbox">
+                        <input type="checkbox" name="genres" value="@genre" @(isChecked ? "checked" : "") onchange="this.form.submit()" />
+                        @genre
+                    </label>
+                }
+            </form>
+        </div>
+    </aside>
+
+    <!-- Movies Grid -->
+    <div class="movies-grid">
+        @foreach (var movie in Model)
+        {
+            <div class="movie-card">
+                <div class="movie-card-image-wrapper">
+                    <img src="@movie.ImageUrl"
+                         alt="@movie.Genre @movie.Title"
+                         class="movie-card-image"
+                         onclick="openImageModal('@movie.ImageUrl', '@movie.Genre @movie.Title')"
+                         title="Click to view full size" />
+                </div>
+                <div class="movie-card-content">
+                    <div class="movie-genre">@movie.Genre</div>
+                    <div class="movie-title">@movie.Title</div>
+                    <div class="movie-year">@movie.Year</div>
+                    <div class="movie-price">$@movie.PricePerDay.ToString("F2")</div>
+                    <div class="movie-price-label">per day</div>
+                    <div class="movie-availability">
+                        <span class="availability-status @(movie.AvailableCopies > 5 ? "available" : movie.AvailableCopies > 0 ? "limited" : "unavailable")">
+                            @if (movie.AvailableCopies > 5)
+                            {
+                                <text>In Stock</text>
+                            }
+                            else if (movie.AvailableCopies > 0)
+                            {
+                                <text>Only @movie.AvailableCopies left</text>
+                            }
+                            else
+                            {
+                                <text>Out of Stock</text>
+                            }
+                        </span>
+                    </div>
+                    @if (movie.AvailableCopies == 0)
+                    {
+                        <button class="btn-rent" disabled>Unavailable</button>
+                    }
+                    else
+                    {
+                        <a asp-controller="Rent" asp-action="Create" asp-route-MovieId="@movie.Id" class="btn-rent">
+                            Rent Now
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="modal fade" id="imageModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageModalLabel"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="modalImage" src="" class="img-fluid" style="max-height: 70vh;" alt="Movie Image" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function openImageModal(imageUrl, movieName) {
+            document.getElementById('modalImage').src = imageUrl;
+            document.getElementById('imageModalLabel').textContent = movieName;
+            var modal = new bootstrap.Modal(document.getElementById('imageModal'));
+            modal.show();
+        }
+    </script>
+}

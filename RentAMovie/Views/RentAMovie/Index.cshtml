@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "RentAMovie - Cinema at Home";
+}
+
+<!-- Cinematic Hero with Rotating Backgrounds -->
+<section class="cinema-hero">
+    <div class="cinema-hero-bg-slider">
+        <div class="cinema-bg-slide active" style="background-image: url('https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg')"></div>
+        <div class="cinema-bg-slide" style="background-image: url('https://image.tmdb.org/t/p/original/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg')"></div>
+        <div class="cinema-bg-slide" style="background-image: url('https://image.tmdb.org/t/p/original/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg')"></div>
+        <div class="cinema-bg-slide" style="background-image: url('https://image.tmdb.org/t/p/original/3bhkrj58Vtu7enYsRolD1fZdja1.jpg')"></div>
+        <div class="cinema-bg-slide" style="background-image: url('https://image.tmdb.org/t/p/original/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg')"></div>
+    </div>
+    <div class="cinema-hero-overlay"></div>
+    <div class="cinema-hero-content">
+        <h1 class="cinema-title">
+            The theater experience<br />
+            <span class="highlight-text">in your living room</span>
+        </h1>
+        <p class="cinema-subtitle">
+            From timeless classics to latest blockbusters - rent what you love, when you love it.
+        </p>
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Movies" asp-action="Index" class="btn-cinema-explore">
+                <span>Explore Movies</span>
+                <span class="btn-icon">→</span>
+            </a>
+        }
+        else
+        {
+            <div class="cinema-cta-buttons">
+                <a asp-controller="Account" asp-action="Register" class="btn-cinema-primary">Start Watching</a>
+                <a asp-controller="Account" asp-action="Login" class="btn-cinema-ghost">Sign In</a>
+            </div>
+        }
+    </div>
+    <div class="cinema-scroll-hint">
+        <span>Scroll to explore</span>
+        <div class="scroll-arrow">↓</div>
+    </div>
+</section>
+
+<!-- Featured Categories with Posters -->
+<section class="featured-categories">
+    <div class="container">
+        <h2 class="cinema-section-title">Explore by genre</h2>
+        <div class="category-showcase">
+            <a asp-controller="Movies" asp-action="Index" asp-route-genres="Action" class="category-poster" style="background-image: url('https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg')">
+                <div class="category-poster-overlay">
+                    <h3>Action</h3>
+                    <span class="category-count">350+ titles</span>
+                </div>
+            </a>
+            <a asp-controller="Movies" asp-action="Index" asp-route-genres="Sci-Fi" class="category-poster" style="background-image: url('https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg')">
+                <div class="category-poster-overlay">
+                    <h3>Sci-Fi</h3>
+                    <span class="category-count">280+ titles</span>
+                </div>
+            </a>
+            <a asp-controller="Movies" asp-action="Index" asp-route-genres="Drama" class="category-poster" style="background-image: url('https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg')">
+                <div class="category-poster-overlay">
+                    <h3>Drama</h3>
+                    <span class="category-count">420+ titles</span>
+                </div>
+            </a>
+            <a asp-controller="Movies" asp-action="Index" asp-route-genres="Crime" class="category-poster" style="background-image: url('https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg')">
+                <div class="category-poster-overlay">
+                    <h3>Crime</h3>
+                    <span class="category-count">190+ titles</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us - Cinematic Style -->
+<section class="cinema-benefits">
+    <div class="container">
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>No Commitments</h3>
+                <p>Rent by the day. No subscriptions. Cancel anytime.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">⚡</div>
+                <h3>Instant Streaming</h3>
+                <p>Start watching in seconds. No downloads needed.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📱</div>
+                <h3>Any Device</h3>
+                <p>Watch on TV, laptop, tablet, or phone.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">💎</div>
+                <h3>4K Quality</h3>
+                <p>Crystal clear picture. Immersive sound.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Big Numbers Section -->
+<section class="cinema-impact">
+    <div class="container">
+        <div class="impact-grid">
+            <div class="impact-stat">
+                <div class="impact-number">18,500+</div>
+                <div class="impact-text">Movies & Shows</div>
+            </div>
+            <div class="impact-stat">
+                <div class="impact-number">120K+</div>
+                <div class="impact-text">Active Users</div>
+            </div>
+            <div class="impact-stat">
+                <div class="impact-number">4.8★</div>
+                <div class="impact-text">Average Rating</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final Push -->
+<section class="cinema-final-cta">
+    <div class="final-cta-content">
+        <h2>Your next favorite movie is waiting</h2>
+        <p>Start your cinematic journey today</p>
+        @if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            <a asp-controller="Movies" asp-action="Index" class="btn-final-action">Browse Full Catalog</a>
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Register" class="btn-final-action">Create Free Account</a>
+        }
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        // Auto-rotating background slideshow
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.cinema-bg-slide');
+        const totalSlides = slides.length;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Change background every 5 seconds
+        setInterval(nextSlide, 5000);
+    </script>
+}

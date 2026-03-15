@@ -1,0 +1,57 @@
+@model IEnumerable<RentAMovie.Models.User>
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<div class="page-header">
+    <h2>Manage Users</h2>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="table-container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Username</td>
+                    <td>
+                        @if (user.Role == "Admin")
+                        {
+                            <span class="badge" style="background-color: var(--error-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px;">@user.Role</span>
+                        }
+                        else
+                        {
+                            <span class="badge" style="background-color: var(--primary-color); color: white; padding: 0.25rem 0.5rem; border-radius: 4px;">@user.Role</span>
+                        }
+                    </td>
+                    <td>
+                        <form method="post" asp-action="ToggleAdmin" asp-route-id="@user.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-primary">
+                                @(user.Role == "Admin" ? "Remove Admin" : "Make Admin")
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Back to Dashboard</a>

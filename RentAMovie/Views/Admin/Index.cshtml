@@ -1,0 +1,49 @@
+@model RentAMovie.Models.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="page-header">
+    <h2>Admin Dashboard</h2>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-3">
+        <div class="card text-white mb-3" style="background-color: var(--primary-color);">
+            <div class="card-body">
+                <h5 class="card-title">Total Users</h5>
+                <h2>@Model.TotalUsers</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white mb-3" style="background-color: var(--success-color);">
+            <div class="card-body">
+                <h5 class="card-title">Total Movies</h5>
+                <h2>@Model.TotalMovies</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white mb-3" style="background-color: #17a2b8;">
+            <div class="card-body">
+                <h5 class="card-title">Total Rents</h5>
+                <h2>@Model.TotalRents</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white mb-3" style="background-color: var(--accent-color);">
+            <div class="card-body">
+                <h5 class="card-title">Active Rents</h5>
+                <h2>@Model.ActiveRents</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Movies" class="btn btn-primary">Manage Movies</a>
+    <a asp-action="Rents" class="btn btn-primary">Manage Rents</a>
+    <a asp-action="Users" class="btn btn-primary">Manage Users</a>
+</div>
