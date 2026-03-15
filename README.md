@@ -20,3 +20,6 @@ The application also includes an admin panel for managing the movie inventory an
 1. To access the admin panel, navigate to `http://localhost:5000/admin` and log in with the following credentials:
    - Username: admin
    - Password: password.
+
+### Todo
+- Need to add more information in the future
